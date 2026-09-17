@@ -1,4 +1,4 @@
-@import './tokens.css';
+@import "./tokens.css";
 
 *,
 *::before,
@@ -133,4 +133,123 @@ img {
 .cart-empty-body {
   margin: 0;
   color: var(--color-beige);
+}
+
+.cart-footer {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-purple-light);
+}
+
+.cart-footer-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  color: var(--color-beige);
+}
+
+.cart-footer-row strong {
+  color: var(--color-white);
+}
+
+.cart-buy {
+  width: 100%;
+  border: 0;
+  border-radius: 8px;
+  padding: 12px;
+  background: var(--color-orange);
+  color: var(--color-purple-darkest);
+  font-weight: 700;
+}
+
+.cart-buy:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  color: var(--color-beige);
+  font-size: 14px;
+}
+
+.cart-header p {
+  margin: 0;
+}
+
+.cart-clear {
+  border: 0;
+  background: none;
+  color: var(--color-beige);
+  padding: 4px;
+}
+
+.cart-clear:hover {
+  color: var(--color-white);
+}
+
+.cart-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.cart-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-purple-light);
+}
+
+.cart-item-image {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: var(--color-white);
+  flex-shrink: 0;
+}
+
+.cart-item-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.cart-item-top,
+.cart-item-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.cart-item-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.cart-item-subtitle {
+  margin: 4px 0 8px;
+  color: var(--color-beige);
+  font-size: 12px;
+}
+
+.cart-item-remove {
+  border: 0;
+  background: none;
+  color: var(--color-beige);
+  font-size: 18px;
+  line-height: 1;
+  padding: 0;
+}
+
+.cart-item-remove:hover {
+  color: var(--color-white);
 }
