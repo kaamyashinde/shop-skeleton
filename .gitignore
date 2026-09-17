@@ -17,3 +17,6 @@ frontend/dist/
 
 # TypeScript
 *.tsbuildinfo
+
+# planning document for development purposes
+plan_docs/
