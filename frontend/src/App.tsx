@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { fetchProducts } from './api/api'
+import { fetchProducts, placeOrder } from './api/api'
 import Cart from './components/Cart'
 import ProductList from './components/ProductList'
 import type { OrderLine, Product } from './types/types'
@@ -33,6 +33,16 @@ export default function App() {
     )
   }
 
+  const buy = async () => {
+    try {
+      const { order_id } = await placeOrder(cart)
+      setCart([])
+      alert(`Kjøpet gikk gjennom. Ordre ${order_id}`)
+    } catch {
+      alert('Kjøpet feilet. Handlekurven er uendret.')
+    }
+  }
+
   return (
     <main className="layout">
       <ProductList products={products} cart={cart} onAdd={add} onSetQty={setQty} />
@@ -42,6 +52,7 @@ export default function App() {
         onAdd={add}
         onSetQty={setQty}
         onClear={clear}
+        onBuy={buy}
       />
     </main>
   )
