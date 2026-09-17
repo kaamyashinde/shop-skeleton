@@ -13,6 +13,8 @@ export default function App() {
 
   const [cart, setCart] = useState<OrderLine[]>([])
 
+  const clear = () => setCart([])
+  
   const add = (productId: string) => {
     setCart((cart) => {
       const exists = cart.some((l) => l.product_id === productId)
@@ -39,6 +41,7 @@ export default function App() {
         cart={cart}
         onAdd={add}
         onSetQty={setQty}
+        onClear={clear}
       />
     </main>
   )

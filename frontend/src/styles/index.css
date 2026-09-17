@@ -1,4 +1,4 @@
-@import './tokens.css';
+@import "./tokens.css";
 
 *,
 *::before,
@@ -135,7 +135,6 @@ img {
   color: var(--color-beige);
 }
 
-
 .cart-footer {
   margin-top: auto;
   padding-top: 16px;
@@ -166,4 +165,29 @@ img {
 .cart-buy:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.cart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  color: var(--color-beige);
+  font-size: 14px;
+}
+
+.cart-header p {
+  margin: 0;
+}
+
+.cart-clear {
+  border: 0;
+  background: none;
+  color: var(--color-beige);
+  padding: 4px;
+}
+
+.cart-clear:hover {
+  color: var(--color-white);
 }
