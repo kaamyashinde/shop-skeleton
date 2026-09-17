@@ -34,7 +34,12 @@ export default function App() {
   return (
     <main className="layout">
       <ProductList products={products} cart={cart} onAdd={add} onSetQty={setQty} />
-      <Cart products={products} />
+      <Cart
+        products={products}
+        cart={cart}
+        onAdd={add}
+        onSetQty={setQty}
+      />
     </main>
   )
 }
