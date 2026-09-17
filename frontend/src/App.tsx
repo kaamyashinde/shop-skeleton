@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { fetchProducts } from './api'
+import { fetchProducts } from './api/api'
 import Cart from './components/Cart'
 import ProductList from './components/ProductList'
-import type { Product } from './types'
+import type { Product } from './types/types'
 
 export default function App() {
   const [products, setProducts] = useState<Product[]>([])
