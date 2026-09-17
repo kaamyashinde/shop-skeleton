@@ -8,6 +8,7 @@ type Props = {
   onAdd: (id: string) => void;
   onSetQty: (id: string, qty: number) => void;
   onClear: () => void;
+  onBuy: () => void;
 };
 
 export default function Cart({
@@ -16,6 +17,7 @@ export default function Cart({
   onAdd,
   onSetQty,
   onClear,
+  onBuy,
 }: Props) {
   const productById = Object.fromEntries(products.map((p) => [p.id, p]));
   const itemCount = cart.reduce((n, l) => n + l.quantity, 0);
@@ -106,6 +108,7 @@ export default function Cart({
               type="button"
               className="cart-buy"
               disabled={cart.length === 0}
+              onClick={onBuy}
             >
               Fullfør kjøp
             </button>
