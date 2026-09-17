@@ -16,6 +16,22 @@ def products(request):
 
 
 
+def _lines_from_request(request):
+    items = json.loads(request.body).get("items") or []
+    if not items:
+        raise ValueError("empty")
+
+    products = Product.objects.in_bulk(item["product_id"] for item in items)
+    lines = []
+    for item in items:
+        product = products.get(item["product_id"])
+        qty = item["quantity"]
+        if product is None or not isinstance(qty, int) or qty < 1:
+            raise ValueError("invalid item")
+        lines.append((product, qty))
+    return lines
+
+
 
 def _save_order(lines):
     total = sum(qty * p.price_ore for p, qty in lines)
