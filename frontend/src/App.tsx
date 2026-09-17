@@ -14,11 +14,13 @@ export default function App() {
   const [cart, setCart] = useState<OrderLine[]>([])
 
   const add = (productId: string) => {
-    const line = cart.some((l) => l.product_id == productId)
-    if (!line) return [...cart, {product_id: productId, quantity: 1}]
-    return cart.map((l) =>
-      l.product_id === productId ? { ...l, quantity: l.quantity + 1 } : l
-    )
+    setCart((cart) => {
+      const exists = cart.some((l) => l.product_id === productId)
+      if (!exists) return [...cart, { product_id: productId, quantity: 1 }]
+      return cart.map((l) =>
+        l.product_id === productId ? { ...l, quantity: l.quantity + 1 } : l
+      )
+    })
   }
 
   const setQty = (productId: string, quantity: number) => {
@@ -31,7 +33,7 @@ export default function App() {
 
   return (
     <main className="layout">
-      <ProductList products={products} />
+      <ProductList products={products} cart={cart} onAdd={add} onSetQty={setQty} />
       <Cart products={products} />
     </main>
   )

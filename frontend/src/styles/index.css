@@ -71,11 +71,43 @@ img {
   font-size: 13px;
 }
 
-/* Pushed to the bottom, so cards line up on uneven titles. */
+.product-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+}
+
 .product-price {
-  margin: auto 0 0;
+  margin: 0;
   font-size: 16px;
   font-weight: 700;
+}
+
+.qty-add {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--color-orange);
+  color: var(--color-purple-darkest);
+  font-size: 22px;
+}
+
+.qty-stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border: 1px solid var(--color-purple-light);
+  border-radius: 8px;
+}
+
+.qty-stepper button {
+  border: 0;
+  background: none;
+  color: inherit;
 }
 
 .cart {
