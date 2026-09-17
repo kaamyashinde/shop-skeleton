@@ -1,5 +1,5 @@
 import { formatOre } from '../format'
-import type { Product } from '../types'
+import type { Product } from '../types/types'
 
 type Props = {
   products: Product[]

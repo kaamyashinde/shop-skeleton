@@ -1,4 +1,4 @@
-import type { OrderLine, Product } from '../types'
+import type { OrderLine, Product } from '../types/types'
 
 export async function fetchProducts(): Promise<Product[]> {
   const res = await fetch('/api/products')
