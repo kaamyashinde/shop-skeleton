@@ -14,6 +14,17 @@ def products(request):
     """GET /api/products -> {"products": [...]}"""
     return JsonResponse({"products": list(Product.objects.values(*PRODUCT_FIELDS))})
 
+@csrf_exempt
+@require_POST
+def create_order(request):
+    try:
+        lines = _lines_from_request(request)
+    except (json.JSONDecodeError, ValueError, KeyError):
+        return JsonResponse({"error": "invalid order"}, status=400)
+
+    order = _save_order(lines)
+    return JsonResponse({"order_id": order.id}, status=201)
+
 
 
 def _lines_from_request(request):
