@@ -1,5 +1,6 @@
 import { formatOre } from "../lib/format";
 import type { OrderLine, Product } from "../types/types";
+import QtyControls from "./QtyControls";
 
 type Props = {
   products: Product[];
@@ -56,6 +57,46 @@ export default function Cart({
               </svg>
             </button>
           </header>
+          <ul className="cart-items">
+            {cart.map((line) => {
+              const product = productById[line.product_id];
+              if (!product) return null;
+
+              return (
+                <li className="cart-item" key={line.product_id}>
+                  <img className="cart-item-image" src={product.image} alt="" />
+                  <div className="cart-item-body">
+                    <div className="cart-item-top">
+                      <div>
+                        <p className="cart-item-title">{product.title}</p>
+                        <p className="cart-item-subtitle">{product.subtitle}</p>
+                      </div>
+                      <button
+                        type="button"
+                        className="cart-item-remove"
+                        onClick={() => onSetQty(line.product_id, 0)}
+                        aria-label={`Fjern ${product.title}`}
+                      >
+                        ×
+                      </button>
+                    </div>
+                    <div className="cart-item-bottom">
+                      <QtyControls
+                        qty={line.quantity}
+                        onAdd={() => onAdd(line.product_id)}
+                        onDec={() =>
+                          onSetQty(line.product_id, line.quantity - 1)
+                        }
+                      />
+                      <strong>
+                        {formatOre(line.quantity * product.price_ore)}
+                      </strong>
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
           <footer className="cart-footer">
             <div className="cart-footer-row">
               <span>Delsum</span>
