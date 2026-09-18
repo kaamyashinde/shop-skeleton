@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { fetchProducts } from './api'
+import { fetchProducts, placeOrder } from './api/api'
 import Cart from './components/Cart'
 import ProductList from './components/ProductList'
-import type { Product } from './types'
+import type { OrderLine, Product } from './types/types'
 
 export default function App() {
   const [products, setProducts] = useState<Product[]>([])
@@ -11,12 +11,49 @@ export default function App() {
     fetchProducts().then(setProducts)
   }, [])
 
-  // TODO: The cart state, and adding, changing a quantity and buying.
+  const [cart, setCart] = useState<OrderLine[]>([])
+
+  const clear = () => setCart([])
+  
+  const add = (productId: string) => {
+    setCart((cart) => {
+      const exists = cart.some((l) => l.product_id === productId)
+      if (!exists) return [...cart, { product_id: productId, quantity: 1 }]
+      return cart.map((l) =>
+        l.product_id === productId ? { ...l, quantity: l.quantity + 1 } : l
+      )
+    })
+  }
+
+  const setQty = (productId: string, quantity: number) => {
+    setCart((cart) =>
+      quantity === 0
+        ? cart.filter((l) => l.product_id !== productId)
+        : cart.map((l) => (l.product_id === productId ? { ...l, quantity } : l))
+    )
+  }
+
+  const buy = async () => {
+    try {
+      const { order_id } = await placeOrder(cart)
+      setCart([])
+      alert(`Kjøpet gikk gjennom. Ordre ${order_id}`)
+    } catch {
+      alert('Kjøpet feilet. Handlekurven er uendret.')
+    }
+  }
 
   return (
     <main className="layout">
-      <ProductList products={products} />
-      <Cart products={products} />
+      <ProductList products={products} cart={cart} onAdd={add} onSetQty={setQty} />
+      <Cart
+        products={products}
+        cart={cart}
+        onAdd={add}
+        onSetQty={setQty}
+        onClear={clear}
+        onBuy={buy}
+      />
     </main>
   )
 }
